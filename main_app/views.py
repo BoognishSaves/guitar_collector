@@ -13,3 +13,8 @@ class Home(View):
         # Here we are returning a generic response
         # This is similar to response.send() in express
         return HttpResponse("Guitar Collector Home")
+
+class About(View):
+
+    def get(self, request):
+        return HttpResponse("Guitar Collector About")

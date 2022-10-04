@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views import View # <- View class to handle requests
 from django.http import HttpResponse # <- a class to handle sending a type of response
 from django.views.generic.base import TemplateView
+# This will import the class we are extending 
+from django.views.generic.edit import CreateView
 # import models
 from .models import Guitar
 
@@ -34,8 +36,18 @@ class GuitarList(TemplateView):
         name = self.request.GET.get("name")
         # If a query exists we will filter by name 
         if name != None:
-            # .filter is the sql WHERE statement and name__icontains is doing a search for any name that contains the query param
             context["guitars"] = Guitar.objects.filter(name__icontains=name)
+            # We add a header context that includes the search param
+            context["header"] = f"Searching for {name}"
         else:
             context["guitars"] = Guitar.objects.all()
+            # default header for not searching 
+            context["header"] = "Trending Guitars"
         return context
+
+
+class GuitarCreate(CreateView):
+    model = Guitar
+    fields = ['name', 'img', 'bio', 'verified_artist']
+    template_name = "guitar_create.html"
+    success_url = "/guitars/"

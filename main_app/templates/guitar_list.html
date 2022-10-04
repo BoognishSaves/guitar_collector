@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1 class="title">Trending Guitars</h1>
+<h1 class="title pt-5">{{header}}</h1>
 
 <form class="mb-5" method="get">
   <div class="field has-addons">
@@ -14,6 +14,7 @@
   </div>
   <!--  This anchor tag will redirect back to artist list without a query param -->
   <a class="button is-dark" href="{% url 'guitar_list' %}">Clear Search</a>
+  <a class="button is-dark" href="{% url 'guitar_create' %}">Add Guitar</a>
 </form>
 <div class="gallery">
   {% for guitar in guitars %}

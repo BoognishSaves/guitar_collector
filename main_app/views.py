@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 
 # import models
-from .models import Guitar, Artist
+from .models import Guitar, Artist, Genre
 
 # Create your views here.
 
@@ -26,7 +26,10 @@ class About(TemplateView):
 
 class Home(TemplateView):
     template_name = "home.html"
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["genres"] = Genre.objects.all()
+        return context
 
 
 

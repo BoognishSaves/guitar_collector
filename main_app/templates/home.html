@@ -9,7 +9,27 @@
     <body>
         {% extends 'base.html' %}
         {% block content %}
-        <h1>Guitar Collector Home</h1>
+        <div class="home__playlists">
+            {% for genre in genres %}
+        
+                <div class="playlist mb-5">
+                    <h3 class="title is-3 has-text-success">{{genre.name}}</h3>
+                    <hr />
+        
+                    {% for artist in genre.artists.all %}
+        
+                        <div class="song">
+                            <span>{{forloop.counter}}</span>
+                            <span><b>{{artist.name}}</b></span>
+                            <span>{{artist.band}}</span>
+                        </div>
+        
+                    {% endfor %}
+                </div>
+            {% empty %} 
+                <div class="playlist mb-5">"There are no songs in this playlist"</div>
+            {% endfor %}
+        </div>
         {% endblock %}
     </body>
 </html>

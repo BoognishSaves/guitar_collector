@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 
 # import models
-from .models import Guitar
+from .models import Guitar, Artist
 
 # Create your views here.
 
@@ -72,3 +72,12 @@ class GuitarDelete(DeleteView):
     model = Guitar
     template_name = "guitar_delete_confirmation.html"
     success_url = "/guitars/"
+
+class ArtistCreate(View):
+
+    def post(self, request, pk):
+        title = request.POST.get("name")
+        length = request.POST.get("band")
+        artist = Guitar.objects.get(pk=pk)
+        Artist.objects.create(name=name, band=band, artist=artist)
+        return redirect('guitar_detail', pk=pk)

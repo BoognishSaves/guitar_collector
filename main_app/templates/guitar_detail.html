@@ -29,6 +29,33 @@
     </div>
     <div class="detail__artists mb-5">
         <h3 class="title is-3">Artists</h3>
+        <form class="mb-5" action="{% url 'artist_create' guitar.pk %}" method="post">
+            {% csrf_token %}
+            <div class="field has-addons">
+                <div class="control">
+                    <input
+                        class="input"
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        required
+                    />
+                </div>
+                <div class="control">
+                    <input
+                        class="input"
+                        type="number"
+                        name="Band"
+                        placeholder="Band"
+                        min="1"
+                        required
+                    />
+                </div>
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Add Artist" />
+                </div>
+            </div>
+        </form>
 
         {% for artist in guitar.artists.all %}
             <div class="song">

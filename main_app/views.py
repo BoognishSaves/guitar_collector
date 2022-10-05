@@ -3,8 +3,9 @@ from django.views import View # <- View class to handle requests
 from django.http import HttpResponse # <- a class to handle sending a type of response
 from django.views.generic.base import TemplateView
 # This will import the class we are extending 
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
+
 # import models
 from .models import Guitar
 
@@ -51,7 +52,8 @@ class GuitarCreate(CreateView):
     model = Guitar
     fields = ['name', 'img', 'bio', 'verified_artist']
     template_name = "guitar_create.html"
-    success_url = "/guitars/"
+    def get_success_url(self):
+        return reverse('guitar_detail', kwargs={'pk': self.object.pk})
 
 class GuitarDetail(DetailView):
     model = Guitar
@@ -62,4 +64,11 @@ class GuitarUpdate(UpdateView):
     model = Guitar
     fields = ['name', 'img', 'bio', 'verified_artist']
     template_name = "guitar_update.html"
+    
+    def get_success_url(self):
+        return reverse('guitar_detail', kwargs={'pk': self.object.pk})
+
+class GuitarDelete(DeleteView):
+    model = Guitar
+    template_name = "guitar_delete_confirmation.html"
     success_url = "/guitars/"

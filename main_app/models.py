@@ -21,8 +21,8 @@ class Guitar(models.Model):
 class Artist(models.Model):
 
     name = models.CharField(max_length=150)
-    length = models.IntegerField(default=0)
+    band = models.CharField(max_length=150)
     guitar = models.ForeignKey(Guitar, on_delete=models.CASCADE, related_name="artists")
 
     def __str__(self):
-        return self.title
+        return self.name

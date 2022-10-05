@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View # <- View class to handle requests
+from django.shortcuts import redirect
 from django.http import HttpResponse # <- a class to handle sending a type of response
 from django.views.generic.base import TemplateView
 # This will import the class we are extending 
@@ -76,8 +77,8 @@ class GuitarDelete(DeleteView):
 class ArtistCreate(View):
 
     def post(self, request, pk):
-        title = request.POST.get("name")
-        length = request.POST.get("band")
-        artist = Guitar.objects.get(pk=pk)
-        Artist.objects.create(name=name, band=band, artist=artist)
+        name = request.POST.get("name")
+        band = request.POST.get("band")
+        guitar = Guitar.objects.get(pk=pk)
+        Artist.objects.create(name=name, band=band, guitar=guitar)
         return redirect('guitar_detail', pk=pk)

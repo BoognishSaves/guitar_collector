@@ -27,6 +27,24 @@
             </span>
         </a>
     </div>
+    <div class="detail__artists mb-5">
+        <h3 class="title is-3">Artists</h3>
+
+        {% for artist in guitar.artists.all %}
+            <div class="song">
+                <span>{{forloop.counter}}</span>
+                <span><b>{{artist.name}}</b></span>
+                <span>{{artist.band}}</span>
+            </div>
+        {% empty %}
+            <article class="message">
+                <div class="message-header">
+                    <p>No Artists Available</p>
+                </div>
+            </article>
+
+        {% endfor %}
+    </div>
     <div class="detail__about">
         <h4 class="title is-4">About</h4>
         <p>{{guitar.bio}}</p>

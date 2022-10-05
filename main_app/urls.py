@@ -11,4 +11,5 @@ urlpatterns = [
     path('guitars/<int:pk>/update',views.GuitarUpdate.as_view(), name="guitar_update"),
     path('guitars/<int:pk>/delete',views.GuitarDelete.as_view(), name="guitar_delete"),
     path('guitars/<int:pk>/artists/new/', views.ArtistCreate.as_view(), name="artist_create"),
+    path('genres/<int:pk>/artists/<int:artist_pk>/', views.GenreArtistAssoc.as_view(), name="genre_artist_assoc"),
 ]

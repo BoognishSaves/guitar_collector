@@ -63,6 +63,11 @@ class GuitarDetail(DetailView):
     model = Guitar
     template_name = "guitar_detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["genres"] = Genre.objects.all()
+        return context
+
 
 class GuitarUpdate(UpdateView):
     model = Guitar
@@ -85,3 +90,22 @@ class ArtistCreate(View):
         guitar = Guitar.objects.get(pk=pk)
         Artist.objects.create(name=name, band=band, guitar=guitar)
         return redirect('guitar_detail', pk=pk)
+
+
+class GenreArtistAssoc(View):
+
+    def get(self, request, pk, artist_pk):
+        # get the query param from the url
+        assoc = request.GET.get("assoc")
+        if assoc == "remove":
+            # get the playlist by the id and
+            # remove from the join table the given song_id
+            Genre.objects.get(pk=pk).artists.remove(artist_pk)
+        if assoc == "add":
+            # get the playlist by the id and
+            # add to the join table the given song_id
+            Genre.objects.get(pk=pk).artists.add(artist_pk)
+        return redirect('home')
+
+
+

@@ -22,6 +22,16 @@
                             <span>{{forloop.counter}}</span>
                             <span><b>{{artist.name}}</b></span>
                             <span>{{artist.band}}</span>
+                            <span>
+                                <!--   Here we are creating an anchor
+                                tag that when clicked will hit our new
+                                route and send a query to remove the song     -->
+                                <a href="{% url 'genre_artist_assoc' genre.pk artist.pk %}?assoc=remove" class="button is-danger is-outlined">
+                                <span class="icon is-small">
+                                    <i class="fas fa-times"></i>
+                                </span>
+                                </a>
+                            </span>
                         </div>
         
                     {% endfor %}

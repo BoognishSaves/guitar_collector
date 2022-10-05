@@ -26,3 +26,12 @@ class Artist(models.Model):
 
     def __str__(self):
         return self.name
+
+class Genre(models.Model):
+
+    name = models.CharField(max_length=150)
+    # this is going to create the many to many relationship and join table
+    artists = models.ManyToManyField(Artist)
+
+    def __str__(self):
+        return self.name
